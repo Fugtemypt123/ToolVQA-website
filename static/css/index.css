@@ -133,5 +133,27 @@ body {
   font-size: smaller;
 }
 
+.single-image-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  justify-content: flex-start;
+}
+
+.single-image-img {
+  /* width: 1000px !important; */
+  max-width: 720px !important;
+  height: auto !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: block;
+}
+
+.single-image-text {
+  margin: 0;
+  text-align: left;
+  font-size: 1.3rem;
+}
+
 
 
