@@ -128,9 +128,9 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="static/images/teaser.png" alt="Teaser Image">
+      <img src="static/images/statistics.png" alt="Teaser Image">
       <h2 class="subtitle has-text-centered">
-        In a gpt-driven data generation pipeline, when a fixed example limits the diversity of generation, LCS matching can integrate multiple examples to enhance generation.
+        ToolVQA contains 23K instances across 7 diverse task domains, with an average inference length of 2.78 reasoning steps per instance. It involves 10 tools with different functions.
       </h2>
     </div>
   </div>
@@ -146,9 +146,10 @@
         <div class="content has-text-justified">
           <p>
             Integrating external tools into Large Foundation Models (LFMs) has emerged as a promising approach to enhance their problem-solving capabilities. While existing studies have demonstrated strong performance in tool-augmented Visual Question Answering (VQA), recent benchmarks reveal significant gaps in real-world tool-use proficiency, particularly in functionally diverse multimodal settings requiring multi-step reasoning.  
-            In this work, we introduce ToolVQA, a large-scale multimodal dataset comprising 23K instances, designed to bridge this gap. Unlike previous datasets that rely on synthetic scenarios and simplified queries, ToolVQA features real-world visual contexts and challenging implicit multi-step reasoning tasks, better aligning with real user interactions.
-            To construct this dataset, we propose ToolEngine, a novel data generation pipeline that employs Depth-First Search (DFS) with a dynamic in-context example matching mechanism to simulate human-like tool-use reasoning. ToolVQA encompasses 10 multimodal tools across 7 diverse task domains, with an average inference length of 2.78 reasoning steps per instance.  
-            The LLaVA-7B model fine-tuned on ToolVQA not only achieves impressive performance on the ToolVQA test set, but also surpasses the large closed-source model GPT-3.5-turbo on various out-of-distribution (OOD) datasets, showing strong generalizability in real-world tool-use scenarios.
+            In this work, we introduce ToolVQA, a large-scale multimodal dataset comprising 23K samples, designed to bridge this gap. Unlike previous datasets that rely on synthetic scenarios and simplified queries, ToolVQA features real-world visual contexts and challenging implicit multi-step reasoning tasks, better aligning with real user interactions.
+            To construct this dataset, we propose ToolEngine, a novel data generation pipeline that employs image-guided Depth-First Search (DFS) with a Longest Common Subsequence (LCS)-based example matching mechanism to simulate human-like tool-use reasoning. 
+            ToolVQA encompasses 10 multimodal tools across 7 diverse domains, with an average inference length of 2.78 reasoning steps per sample.  
+            The LLaVA-7B model fine-tuned on ToolVQA not only achieves impressive performance on the ToolVQA test set, but also surpasses the large closed-source model GPT-3.5-turbo on five out-of-distribution (OOD) datasets, showing strong generalizability in real-world tool-use scenarios.
           </p>
         </div>
       </div>
@@ -161,14 +162,15 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div class="item single-image-row">
-        <img class="single-image-img" src="static/images/new_teaser.jpg" alt="MY ALT TEXT"/>
+      <div class="item single-image-row" style="width: 1000px; margin: 0 auto;">
+        <img class="single-image-img" src="static/images/new_teaser.jpg" alt="MY ALT TEXT" style="width: 500px;  height: auto;"/>
         <h2 class="subtitle single-image-text">
-          One effective approach to enhancing LFM's tool-use capability is fine-tuning on large-scale datasets. However, there remains a significant gap between existing large-scale datasets and real-world user needs. Through the study of real user logs, we find that real-world tool usage involves (1) real-world scenarios: complex visual scenarios with real-world context (e.g. real-taken photos rather than synthetic images), and (2) real-world queries: challenging queries with implicit multi-step reasoning process. 
+          Through the study of real user logs, we find that real-world tool usage involves: 
+          <!-- 加粗标题 -->
+          <br><strong>1. real-world scenarios:</strong> complex visual scenarios with real-world context (e.g. real-taken photos rather than synthetic images);
+          <br><strong>2. real-world queries:</strong> challenging queries with implicit multi-step reasoning process. 
           <br><br>
-          However, existing datasets often lack these two critical properties. The scenarios are synthesized instead of real-taken, resulting in overly simplistic scenes that do not align with real-world scenarios. The queries require only single-step reasoning or explicitly provide hints about the reasoning process, such as ``using the Cheap YouTube API tool''. 
-          <br><br>
-          These setups overly simplify the task, creating a gap between synthetic and real-world tool usage, which limits our ability to analyze LFMs' performance on this task. Additionally, some datasets rely on costly human annotations, making them difficult to scale, which limits fine-tuning to enhance LFMs' tool-using capabilities.
+          However, existing datasets often lack these two critical properties. The scenarios are synthesized instead of real-taken, resulting in overly simplistic scenes that do not align with real-world scenarios. The queries require only single-step reasoning or explicitly provide hints about the reasoning process, such as "using the Cheap YouTube API tool". 
         </h2>
       </div>
     </div>
@@ -178,14 +180,10 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div class="item">
+      <div class="item" style="width: 1000px; margin: 0 auto;">
         <img src="static/images/method.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle single-image-text">
-          To bridge these gaps, we introduce ToolEngine, a data construction pipeline designed to generate multi-step reasoning VQA data for tool usage. ToolEngine employs a Depth-First Search (DFS) approach to simulate the human-like multi-step reasoning process under the guidance of real user context examples. To facilitate multi-step reasoning in data, we introduce a novel dynamic example matching mechanism. During each step in the iterative search process, this mechanism matches different real-world tool-use examples based on the previous search trajectory, guiding the controller in making the next selection.
-          <br><br>
-          This mechanism enables (1) Extracting rich visual information from the input image. (2) Integrating this information during the reasoning process to propose challenging queries. By freeing query generation from the constraints of fixed templates, ToolEngine enhances the utilization of visual information, consequently increasing the reasoning complexity of the generated queries.
-          <br><br>
-          The generated dataset, ToolVQA, contains 23K instances across 7 diverse task domains, with an average inference length of 2.78 reasoning steps per instance. The LLaVA-7B model fine-tuned on ToolVQA not only achieves impressive performance on the ToolVQA test set, but also surpasses the large closed-source model GPT-3.5-turbo on various out-of-distribution (OOD) datasets, showing strong generalizability in real-world tool-use scenarios.
+          To bridge these gaps, we introduce ToolEngine, a data construction pipeline designed to generate multi-step reasoning VQA data for tool usage. It only needs <strong>a single image</strong> to generate high-quality visual reasoning data. ToolEngine employs a Depth-First Search (DFS) approach and a Longest Common Subsequence (LCS)-based matching mechanism to simulate human-like tool-use reasoning.
         </h2>
       </div>
     </div>
@@ -195,8 +193,24 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div class="item">
+      <div class="item" style="width: 1000px; margin: 0 auto;">
+        <img src="static/images/main.png" alt="MY ALT TEXT"/>
+        <img src="static/images/ood.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle single-image-text">
+          The LLaVA-7B model fine-tuned on ToolVQA not only achieves impressive performance on the ToolVQA test set, but also surpasses the large closed-source model GPT-3.5-turbo on various out-of-distribution (OOD) datasets, showing strong generalizability in real-world tool-use scenarios.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="item" style="width: 1000px; margin: 0 auto;">
         <img src="static/images/testset_vis.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle single-image-text">
+        ToolVQA contain high-quality multi-step visual reasoning instances, serving as both a benchmark and a training ground for developing more capable, generalizable tool using agents.
       </div>
     </div>
   </div>
@@ -315,7 +329,15 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
+      <pre><code>@misc{yin2025toolvqadatasetmultistepreasoning,
+  title={ToolVQA: A Dataset for Multi-step Reasoning VQA with External Tools}, 
+  author={Shaofeng Yin and Ting Lei and Yang Liu},
+  year={2025},
+  eprint={2508.03284},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2508.03284}, 
+}</code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
